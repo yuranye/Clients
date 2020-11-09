@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  protoc:
+    image: jaegertracing/protobuf:latest
+    command: --proto_path=${PWD}/proto --go_opt=paths=source_relative --go_out=plugins=grpc:${PWD}/build/gen "${PWD}/proto/clients/**/*.proto"
+    volumes:
+      - ${PWD}:${PWD}
+    working_dir: ${PWD}
